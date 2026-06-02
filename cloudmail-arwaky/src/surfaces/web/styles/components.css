@@ -1,0 +1,283 @@
+/* Reusable UI Components — SYSTEM TERMINAL style
+   Panels, modals, toasts, tabs, empty states with unified aesthetic
+*/
+
+/* ── Panel (glass card container) ── */
+.panel {
+  background: rgba(10, 10, 10, 0.7);
+  border: 1px solid var(--color-outline);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  position: relative;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.panel:hover {
+  border-color: rgba(192, 132, 252, 0.12);
+}
+
+.panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(192, 132, 252, 0.01) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.panel-header {
+  padding: var(--space-6) var(--space-8);
+  border-bottom: 1px solid var(--color-outline);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.panel-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+  margin: 0;
+}
+
+.panel-subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  margin-top: var(--space-1);
+}
+
+/* ── Status Tags ── */
+.status-tag {
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  font-size: 10px;
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  gap: var(--space-1-5);
+}
+
+.status-tag-active {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-success);
+  font-size: 10px;
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.tag-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-success);
+  box-shadow: 0 0 10px var(--color-success);
+  animation: indicator-pulse 2s ease-in-out infinite;
+}
+
+/* ── Credentials Box ── */
+.creds-box-premium {
+  margin-top: var(--space-6);
+  padding: var(--space-6);
+  background: var(--color-primary-dim);
+  border: 1px solid rgba(192, 132, 252, 0.2);
+  border-radius: var(--radius-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  position: relative;
+}
+
+.creds-box-premium::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(192, 132, 252, 0.02) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.creds-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.creds-tag {
+  font-size: 9px;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  background: rgba(192, 132, 252, 0.15);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  letter-spacing: 0.1em;
+  border: 1px solid rgba(192, 132, 252, 0.2);
+}
+
+.creds-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.creds-row-glass {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-4);
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.creds-row-glass:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(192, 132, 252, 0.15);
+  box-shadow: 0 0 20px rgba(192, 132, 252, 0.05);
+}
+
+.creds-label {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-muted);
+  min-width: 90px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.creds-value {
+  font-family: var(--font-family-code);
+  font-size: var(--font-size-sm);
+  color: var(--color-text);
+  flex: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.creds-warning {
+  font-size: var(--font-size-xs);
+  color: var(--color-warning);
+  font-style: italic;
+  margin-top: var(--space-2);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* ── User Directory ── */
+.user-compact-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+}
+
+.user-compact-row:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.user-compact-left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+.user-compact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.user-compact-name {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.user-compact-email {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.user-compact-right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-shrink: 0;
+}
+
+.avatar-mini {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-full);
+  background: var(--color-surface-300);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-muted);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.avatar-mini.active {
+  background: var(--gradient-primary);
+  color: #000;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 16px rgba(192, 132, 252, 0.3);
+}
+
+.badge-pill {
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  font-size: 9px;
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: 1px solid transparent;
+}
+
+.badge-pill.admin {
+  background: var(--color-primary-dim);
+  color: var(--color-primary);
+  border-color: rgba(192, 132, 252, 0.2);
+}
+
+.badge-pill.user {
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--color-text-muted);
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+/* ── Empty States ── */
+.empty-state-sm {
+  padding: var(--space-6);
+  text-align: center;
+  color: var(--color-text-muted);
+  background: rgba(255, 255, 255, 0.01);
+  border-radius: var(--radius-md);
+  border: 1px dashed var(--color-outline);
+}

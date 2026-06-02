@@ -1,0 +1,13 @@
+{
+  "extends": "../../../tsconfig.json",
+  "compilerOptions": {
+    "paths": {
+      "$taxonomy": ["../../taxonomy"],
+      "$taxonomy/*": ["../../taxonomy/*"],
+      "$contract": ["../../contract"],
+      "$contract/*": ["../../contract/*"]
+    }
+  },
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules", "dist", ".react-router"]
+}

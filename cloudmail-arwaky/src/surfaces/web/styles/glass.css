@@ -1,0 +1,128 @@
+/* Glassmorphism — SYSTEM TERMINAL style
+   Sharper edges, subtle glow borders, technical aesthetic
+*/
+
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  position: relative;
+  overflow: hidden;
+}
+
+.glass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-surface);
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.glass::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: var(--glass-grain);
+  opacity: 0.02;
+  pointer-events: none;
+}
+
+/* ── Glass Card (Primary Component) ── */
+.glass-card {
+  background: rgba(15, 15, 15, 0.8);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-lg);
+  position: relative;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.glass-card:hover {
+  border-color: rgba(192, 132, 252, 0.15);
+  box-shadow: 0 0 30px rgba(192, 132, 252, 0.06);
+}
+
+.glass-card-active {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 40px rgba(192, 132, 252, 0.2),
+              inset 0 0 20px rgba(192, 132, 252, 0.03);
+}
+
+/* ── Skeleton Loading ── */
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-surface-200);
+  border-radius: var(--radius-sm);
+}
+
+.skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(192, 132, 252, 0.05) 50%,
+    transparent 100%
+  );
+  animation: shimmer 1.5s infinite;
+}
+
+.skeleton-text { height: 1em; width: 100%; margin: 0.5em 0; border-radius: 2px; }
+
+.skeleton-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  border-bottom: 1px solid var(--color-outline);
+}
+
+.skeleton-row:last-child { border-bottom: none; }
+
+/* ── Corner Bracket Decoration ── */
+.corner-bracket {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--color-primary);
+  pointer-events: none;
+  opacity: 0.3;
+  transition: opacity 0.2s ease;
+}
+
+.corner-bracket-tl { top: -2px; left: -2px; border-right: none; border-bottom: none; }
+.corner-bracket-tr { top: -2px; right: -2px; border-left: none; border-bottom: none; }
+.corner-bracket-bl { bottom: -2px; left: -2px; border-right: none; border-top: none; }
+.corner-bracket-br { bottom: -2px; right: -2px; border-left: none; border-top: none; }
+
+.glass-card:hover .corner-bracket {
+  opacity: 0.7;
+}
+
+/* ── Glow Border Accent ── */
+.glow-border {
+  position: relative;
+}
+
+.glow-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, var(--color-primary), transparent 30%, transparent 70%, var(--color-secondary));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+.glow-border-accent::before {
+  background: linear-gradient(135deg, var(--color-accent), transparent 30%, transparent 70%, var(--color-accent));
+}

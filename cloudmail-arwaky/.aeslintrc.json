@@ -1,0 +1,17 @@
+{
+  "rules": {
+    "file-length": {
+      "max": 300,
+      "min": null
+    },
+    "contract-naming": true,
+    "surface-import-audit": true,
+    "agent-router-thin": true,
+    "taxonomy-no-primitive": true,
+    "contract-no-primitive": true,
+    "suffix-validation": true,
+    "barrel-completeness": true,
+    "nonvo-imports-vo": true,
+    "file-naming": true
+  }
+}

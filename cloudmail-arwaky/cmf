@@ -1,0 +1,10 @@
+#!/bin/bash
+# cmf — CloudMailFlare CLI wrapper
+# Usage: ./cmf user list
+#        ./cmf inbox get <emailId>
+#        ./cmf dashboard
+#        ./cmf settings
+
+cd "$(dirname "$0")"
+set -a; source .env; set +a
+exec npx tsx src/surfaces/cli/cli_entry.ts "$@"

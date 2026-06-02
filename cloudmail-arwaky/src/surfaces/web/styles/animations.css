@@ -1,0 +1,218 @@
+/* Keyframes & Animation Library — Optimized for Compositing */
+
+/* ── Reveal Animations ── */
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes reveal-left {
+  from { opacity: 0; transform: translateX(-12px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes reveal-right {
+  from { opacity: 0; transform: translateX(12px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes reveal-scale {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ── Fade Animations ── */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Glow & Pulse ── */
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 4px var(--color-primary-dim), 0 0 8px var(--color-primary-dim);
+  }
+  50% {
+    box-shadow: 0 0 8px var(--color-primary-glow), 0 0 16px var(--color-primary-glow);
+  }
+}
+
+@keyframes indicator-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.1); }
+}
+
+/* ── Spinner ── */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Shimmer (loading skeletons) ── */
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* ── Slide Up ── */
+@keyframes slide-up {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ── Toast In ── */
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateX(100%) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes toast-out {
+  from {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100%) scale(0.9);
+  }
+}
+
+/* ── Scanline (subtle monitor effect) ── */
+@keyframes scanline {
+  0% { transform: translateY(-2px); }
+  100% { transform: translateY(100vh); }
+}
+
+/* ── Staggered Entry Helpers ── */
+.stagger-1 { animation-delay: 0.05s; }
+.stagger-2 { animation-delay: 0.1s; }
+.stagger-3 { animation-delay: 0.15s; }
+.stagger-4 { animation-delay: 0.2s; }
+.stagger-5 { animation-delay: 0.25s; }
+.stagger-6 { animation-delay: 0.3s; }
+.stagger-7 { animation-delay: 0.35s; }
+.stagger-8 { animation-delay: 0.4s; }
+
+/* ── Animation Classes ── */
+.reveal {
+  animation: reveal 0.4s cubic-bezier(0.2, 0, 0, 1) both;
+}
+
+.reveal-fast {
+  animation: reveal 0.25s cubic-bezier(0.2, 0, 0, 1) both;
+}
+
+.fade-in {
+  animation: fade-in 0.3s ease-out both;
+}
+
+.fade-in-up {
+  animation: fade-in-up 0.4s cubic-bezier(0.2, 0, 0, 1) both;
+}
+
+.glow-pulse {
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+
+.indicator-pulse {
+  animation: indicator-pulse 1.5s ease-in-out infinite;
+}
+
+.spin {
+  animation: spin 0.8s linear infinite;
+}
+
+.scanline {
+  position: relative;
+  overflow: hidden;
+}
+.scanline::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(192, 132, 252, 0.03) 50%,
+    transparent 100%
+  );
+  animation: scanline 3s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── Hover Micro-interactions ── */
+.hover-lift {
+  transition: transform 0.25s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.25s cubic-bezier(0.2, 0, 0, 1);
+}
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.hover-glow {
+  transition: box-shadow 0.25s cubic-bezier(0.2, 0, 0, 1);
+}
+.hover-glow:hover {
+  box-shadow: var(--shadow-glow-primary);
+}
+
+/* ── Respect User Preferences ── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal,
+  .fade-in,
+  .fade-in-up,
+  .glow-pulse,
+  .indicator-pulse,
+  .spin,
+  .scanline {
+    animation: none !important;
+  }
+}

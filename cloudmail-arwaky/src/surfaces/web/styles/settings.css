@@ -1,0 +1,92 @@
+/* Settings Page Layout and Components */
+
+.settings-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: var(--space-10) var(--space-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-10);
+}
+
+.settings-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.settings-header {
+  border-bottom: 1px solid var(--color-outline);
+  padding-bottom: var(--space-4);
+}
+
+.settings-title { font-size: 20px; font-weight: 700; color: var(--color-text-high); }
+.settings-description { font-size: 14px; color: var(--color-text-muted); margin-top: var(--space-1); }
+
+.settings-content { display: flex; flex-direction: column; gap: var(--space-6); }
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-6);
+}
+
+.actions-row {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-outline);
+}
+
+.creds-box-premium {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--color-outline);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.user-compact-row {
+  padding: var(--space-4) var(--space-6);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.settings-actions-bar {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.settings-config-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+  padding: var(--space-4) 0;
+  border-bottom: 1px solid var(--color-outline);
+}
+
+.settings-config-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+}
+
+.config-table { width: 100%; border-collapse: collapse; }
+.config-table th { text-align: left; padding: var(--space-4); color: var(--color-text-muted); font-size: 12px; text-transform: uppercase; border-bottom: 1px solid var(--color-outline); }
+.config-table td { padding: var(--space-4); border-bottom: 1px solid var(--color-outline); }
+
+.settings-override-card {
+  margin-top: var(--space-8);
+  padding: var(--space-8);
+  background: linear-gradient(135deg, rgba(192, 132, 252, 0.05) 0%, transparent 100%);
+  border: 1px solid rgba(192, 132, 252, 0.2);
+  border-radius: var(--radius-2xl);
+}

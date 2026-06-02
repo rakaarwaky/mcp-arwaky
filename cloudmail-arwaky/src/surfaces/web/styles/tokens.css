@@ -1,0 +1,135 @@
+/* Design Tokens — Per DESIGN.md
+   Cloud Mail Flare: Professional infrastructure, calm and clear.
+   - Dark interface (deep blacks)
+   - Purple accents (technical, professional)
+   - Clean space, minimal decoration
+   - Sans-serif body, monospace for data
+*/
+
+:root {
+  /* ── Primary Palette — Purple (as per DESIGN.md) ── */
+  --color-primary: #c084fc;
+  --color-primary-500: #c084fc;
+  --color-primary-600: #a855f7;
+  --color-primary-700: #7e22ce;
+  --color-primary-dim: rgba(192, 132, 252, 0.1);
+  --color-primary-soft: rgba(192, 132, 252, 0.15);
+  --color-primary-glow: rgba(192, 132, 252, 0.3);
+
+  --color-secondary: #e879f9;
+  --color-secondary-dim: rgba(232, 121, 249, 0.1);
+
+  /* ── Surface Hierarchy ── */
+  --color-surface: #0a0a0c;
+  --color-surface-low: #111114;
+  --color-surface-card: #18181b;
+  --color-surface-high: #232326;
+  --color-surface-highest: #2d2d30;
+  --color-surface-50: #0a0a0a;
+  --color-surface-100: #0f0f0f;
+  --color-surface-200: #1a1a1a;
+  --color-surface-300: #252525;
+
+  /* ── Text ── */
+  --color-text: #ffffff;
+  --color-text-secondary: #e4e4e7;
+  --color-text-muted: #a1a1aa;
+  --color-text-muted-bright: #d4d4d8;
+  --color-text-dim: #888888;
+
+  /* ── Functional Colors (per DESIGN.md) ── */
+  --color-success: #10b981;
+  --color-success-dim: rgba(16, 185, 129, 0.1);
+  --color-danger: #ef4444;
+  --color-danger-dim: rgba(239, 68, 68, 0.1);
+  --color-warning: #f59e0b;
+  --color-warning-dim: rgba(245, 158, 11, 0.1);
+  --color-info: #3b82f6;
+  --color-info-soft: rgba(59, 130, 246, 0.1);
+
+  /* ── Outline & Borders ── */
+  --color-outline: rgba(255, 255, 255, 0.08);
+  --color-outline-strong: rgba(255, 255, 255, 0.15);
+  --color-outline-focus: var(--color-primary);
+
+  /* ── Typography — Sans-serif body (per DESIGN.md) ── */
+  --font-family-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-family-headline: 'Outfit', 'Inter', sans-serif;
+  --font-family-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --font-family-code: var(--font-family-mono);
+  --font-family-display: 'Outfit', 'Inter', sans-serif;
+
+  /* ── Font Sizes ── */
+  --font-size-xs: 0.8125rem;
+  --font-size-sm: 0.9375rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+  --font-size-4xl: 2.25rem;
+
+  --font-size-label: var(--font-size-xs);
+  --font-size-body: var(--font-size-base);
+  --font-size-body-sm: var(--font-size-sm);
+  --font-size-h1: var(--font-size-4xl);
+  --font-size-h2: var(--font-size-3xl);
+  --font-size-h3: var(--font-size-2xl);
+  --font-size-h4: var(--font-size-xl);
+
+  /* ── Font Weights ── */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+
+  /* ── Spacing ── */
+  --space-1: 0.25rem;
+  --space-1-5: 0.375rem;
+  --space-2: 0.5rem;
+  --space-2-5: 0.625rem;
+  --space-3: 0.75rem;
+  --space-3-5: 0.875rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+
+  /* ── Border Radius ── */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* ── Shadows ── */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --shadow-glow-primary: 0 0 20px var(--color-primary-dim);
+
+  /* ── Gradients ── */
+  --gradient-primary: linear-gradient(135deg, var(--color-primary-500) 0%, var(--color-primary-600) 100%);
+  --gradient-surface: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0) 100%);
+
+  /* ── Glass ── */
+  --glass-bg: rgba(10, 10, 12, 0.85);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-blur: blur(20px);
+  --glass-grain: none;
+
+  /* ── Transitions ── */
+  --transition-fast: all 0.15s ease;
+  --transition-smooth: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ── Layout ── */
+  --sidebar-width: 280px;
+  --topbar-height: 64px;
+  --content-max-width: 1400px;
+}

@@ -1,0 +1,24 @@
+node_modules/
+dist/
+.react-router/
+.env
+.dev.vars
+*.tsbuildinfo
+
+__pycache__/
+coverage/
+.wrangler/
+# web-dist/ (Moved to src/surfaces/web/)
+config.yaml
+TEST.md
+reports/progress_*.md
+
+# Backup & patch artifacts
+*.orig
+*.rej
+*.bak
+backup_*/
+
+# Build artifacts
+src/surfaces/web/web-dist/
+tmp/

@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "fetch": {
+      "command": "node",
+      "args": [
+        "/home/raka/mcp-servers/fetch-mcp/dist/index.js"
+      ]
+    }
+  }
+}

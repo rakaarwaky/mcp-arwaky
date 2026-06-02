@@ -1,0 +1,277 @@
+/* Mobile-first responsive styles — SYSTEM TERMINAL Aesthetic
+   Collapses to single column, compact navigation, touch-optimized targets
+*/
+
+/* ── Tablet (≤1024px) ── */
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 80px;
+  }
+
+  .logo span,
+  .nav-label,
+  .user-details,
+  .health-text {
+    display: none;
+  }
+
+  .nav-link {
+    justify-content: center;
+    padding: var(--space-3);
+  }
+
+  .nav-icon-wrapper {
+    font-size: 20px;
+  }
+
+  .sidebar-profile-card {
+    justify-content: center;
+    padding: var(--space-2);
+  }
+
+  .page-title {
+    font-size: var(--font-size-xl);
+  }
+
+  .dashboard-content {
+    padding: var(--space-6);
+    gap: var(--space-6);
+  }
+
+  .grid-dashboard {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4);
+  }
+
+  .stat-card {
+    padding: var(--space-4);
+    gap: var(--space-3);
+  }
+
+  .stat-icon {
+    width: 44px;
+    height: 44px;
+    font-size: 20px;
+  }
+
+  .stat-value {
+    font-size: var(--font-size-2xl);
+  }
+}
+
+/* ── Mobile (≤768px) ── */
+@media (max-width: 768px) {
+  .app-shell {
+    flex-direction: column;
+  }
+
+  .app-sidebar {
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--color-outline);
+  }
+
+  .sidebar-nav {
+    flex-direction: row;
+    overflow-x: auto;
+    padding: var(--space-2);
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-surface-400) transparent;
+  }
+
+  .sidebar-nav::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  .sidebar-nav::-webkit-scrollbar-thumb {
+    background: var(--color-surface-400);
+    border-radius: var(--radius-full);
+  }
+
+  .logo {
+    padding: var(--space-4);
+  }
+
+  .sidebar-footer {
+    display: flex;
+    justify-content: center;
+    padding: var(--space-2);
+  }
+
+  .sidebar-profile-card {
+    flex-direction: row;
+    justify-content: center;
+    text-align: center;
+    padding: var(--space-2) var(--space-3);
+    gap: var(--space-2);
+  }
+
+  .user-avatar-sm {
+    width: 32px;
+    height: 32px;
+    font-size: 12px;
+  }
+
+  .topbar {
+    padding: 0 var(--space-4);
+    height: 56px;
+  }
+
+  .page-title {
+    font-size: var(--font-size-lg);
+  }
+
+  .dashboard-content {
+    padding: var(--space-4);
+  }
+
+  .grid-dashboard {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-card {
+    padding: var(--space-4);
+  }
+
+  .panel {
+    border-radius: var(--radius-lg);
+  }
+
+  .panel-header {
+    padding: var(--space-4);
+  }
+
+  .email-table {
+    display: none;
+  }
+
+  .email-cards-mobile {
+    display: flex;
+  }
+
+  .inbox-table-container {
+    display: none;
+  }
+
+  .inbox-toolbar {
+    padding: var(--space-3) var(--space-4);
+  }
+
+  .tab-btn {
+    padding: var(--space-2) var(--space-3);
+    font-size: 12px;
+  }
+
+  /* ── Action buttons on mobile ── */
+  .btn-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .action-buttons {
+    gap: var(--space-1);
+  }
+}
+
+/* ── Small Mobile (≤640px) ── */
+@media (max-width: 640px) {
+  .login-centered-container {
+    padding: var(--space-4);
+    max-width: 100%;
+  }
+
+  .login-card {
+    padding: var(--space-6);
+    border-radius: var(--radius-lg);
+  }
+
+  .login-logo {
+    font-size: var(--font-size-2xl);
+  }
+
+  .btn-primary {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .page-title {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .mobile-logo {
+    display: block;
+  }
+
+  /* ── Compact tables/cards ── */
+  .creds-row-glass {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-2);
+  }
+
+  .creds-value {
+    font-size: var(--font-size-xs);
+  }
+
+  /* ── Hide secondary info on tiny screens ── */
+  .panel-subtitle {
+    display: none;
+  }
+
+  .stat-label {
+    font-size: 10px;
+  }
+
+  .stat-value {
+    font-size: var(--font-size-xl);
+  }
+
+  /* Adjust grid gaps */
+  .grid-dashboard {
+    gap: var(--space-3);
+  }
+
+  .dashboard-content {
+    gap: var(--space-6);
+  }
+}
+
+/* ── Touch & Interaction ── */
+@media (hover: none) and (pointer: coarse) {
+  /* Increase touch targets */
+  .btn-icon,
+  .btn-icon-glass,
+  .tab-btn {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .nav-link {
+    padding: var(--space-4);
+    min-height: 48px;
+  }
+
+  /* Disable hover effects on touch */
+  .hover-lift:hover,
+  .hover-glow:hover {
+    transform: none;
+  }
+}
+
+/* ── Safe Area Insets (notch support) ── */
+@supports (padding-top: env(safe-area-inset-top)) {
+  .topbar {
+    padding-top: max(var(--space-4), env(safe-area-inset-top));
+  }
+
+  .sidebar {
+    padding-top: max(var(--space-6), env(safe-area-inset-top));
+  }
+
+  .login-centered-container {
+    padding-top: max(var(--space-4), env(safe-area-inset-top));
+  }
+}

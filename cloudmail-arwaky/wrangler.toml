@@ -1,0 +1,29 @@
+name = "cloud-mail-flare-aes"
+main = "src/agent/mail_flare_worker.ts"
+compatibility_date = "2026-04-07"
+compatibility_flags = ["nodejs_compat"]
+workers_dev = true
+preview_urls = false
+
+[assets]
+directory = "src/surfaces/web/web-dist/client"
+binding = "ASSETS"
+not_found_handling = "single-page-application"
+
+[vars]
+MAILFLARE_USER_DOMAIN = "immortalunion.space"
+MAILFLARE_NOTIFY_URL = "https://mail.immortalunion.space"
+CLEANUP_MAX_AGE_HOURS = "24"
+RATE_LIMIT_SESSION = "60"
+RATE_LIMIT_APIKEY = "100"
+ALLOWED_ORIGINS = "https://mail.immortalunion.space"
+CMF_APP_NAME = "Cloud Mail Flare"
+CMF_APP_SUBTITLE = "Secure access to mail infrastructure"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "cloud-mail-flare-aes-db"
+database_id = "d204abbd-d0fb-402f-9ccf-b98a9791ef85"
+
+[triggers]
+crons = ["*/10 * * * *"]

@@ -1,0 +1,208 @@
+/* Login & Authentication — SYSTEM TERMINAL style
+   Sharp angles, terminal aesthetic, cyan glow accents, scanlines
+*/
+
+.login-page {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-surface);
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── Animated Mesh Background ── */
+.login-mesh {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 20%, rgba(192, 132, 252, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, var(--color-primary-dim) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(255, 170, 0, 0.03) 0%, transparent 40%);
+  filter: blur(80px);
+  z-index: 0;
+  animation: pulse 8s ease-in-out infinite alternate;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.6; transform: scale(1); }
+  100% { opacity: 0.9; transform: scale(1.1); }
+}
+
+/* ── Grid overlay ── */
+.login-mesh::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: var(--gradient-grid);
+  background-size: 60px 60px;
+  opacity: 0.03;
+  pointer-events: none;
+}
+
+/* ── Center Container ── */
+.login-centered-container {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 480px;
+  padding: var(--space-6);
+}
+
+/* ── Login Card ── */
+.login-card {
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--color-outline);
+  border-radius: var(--radius-xl);
+  padding: var(--space-10);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8),
+              0 0 1px rgba(192, 132, 252, 0.1);
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--gradient-primary);
+  box-shadow: 0 0 20px var(--color-primary-glow);
+}
+
+.login-card:hover {
+  border-color: rgba(192, 132, 252, 0.2);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8),
+              0 0 1px rgba(192, 132, 252, 0.2),
+              0 0 40px rgba(192, 132, 252, 0.05);
+}
+
+/* Corner brackets (decorative) */
+.login-card::after {
+  content: '';
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--color-primary);
+  border-left: none;
+  border-bottom: none;
+  opacity: 0.3;
+}
+
+/* ── Login Header ── */
+.login-header {
+  text-align: center;
+  margin-bottom: var(--space-8);
+  position: relative;
+}
+
+.login-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-extrabold);
+  color: var(--color-primary);
+  margin-bottom: var(--space-3);
+  font-family: var(--font-family-display);
+  letter-spacing: -0.03em;
+  text-shadow: 0 0 30px rgba(192, 132, 252, 0.4);
+}
+
+.login-logo .material-symbols-outlined {
+  font-size: 36px;
+  color: var(--color-primary);
+}
+
+.login-subtitle {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  font-family: var(--font-family-body);
+}
+
+/* ── Login Form ── */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.login-error-box {
+  background: var(--color-danger-dim);
+  border: 1px solid rgba(255, 51, 102, 0.3);
+  color: #ff8fa3;
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+@keyframes shake {
+  10%, 90% { transform: translateX(-1px); }
+  20%, 80% { transform: translateX(2px); }
+  30%, 50%, 70% { transform: translateX(-3px); }
+  40%, 60% { transform: translateX(3px); }
+}
+
+.login-error-box .material-symbols-outlined {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+/* ── Form Group Stack ── */
+.form-group-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+/* ── Login Footer ── */
+.login-footer {
+  margin-top: var(--space-8);
+  text-align: center;
+  font-size: 11px;
+  color: var(--color-text-muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.login-footer p {
+  font-family: var(--font-family-body);
+  letter-spacing: 0.15em;
+}
+
+/* ── Scanline Effect on Login Card ── */
+.login-card.scanline {
+  animation: none;
+}
+
+.login-card.scanline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(192, 132, 252, 0.02) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}

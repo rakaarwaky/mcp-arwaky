@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "cloud-mail-flare": {
+      "command": "node",
+      "args": [
+        "/home/raka/mcp-servers/cloud-mail-flare/mcp_server.js"
+      ]
+    }
+  }
+}
