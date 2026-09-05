@@ -74,6 +74,7 @@ cmd_help() {
   echo -e "  ${GREEN}install${RESET} [tool] [--distrobox|--host]  Install tools (Two paradigms only: Distrobox or Host)"
   echo -e "  ${GREEN}anytype${RESET} [action]                Manage Anytype headless daemon, bot accounts & keys"
   echo -e "  ${GREEN}mcp${RESET} [action]                   Manage MCP configurations (list, generate, show)"
+  echo -e "  ${GREEN}skill${RESET} [action]                 Manage & provision agent skills to workspace (agents/skill/ & .agents/skills/)"
   echo -e "  ${GREEN}shell${RESET}                          Enter the Distrobox 'agents-env' sandbox shell"
   echo -e "  ${GREEN}help${RESET}                           Show this help message"
   echo ""
@@ -390,6 +391,7 @@ main() {
     install)         cmd_install "$@" ;;
     anytype)         "$REPO_ROOT/tools/anytype-mcp/daemon/anytype-daemon.sh" "$@" ;;
     mcp)             cmd_mcp "$@" ;;
+    skill|skills)    "$REPO_ROOT/tools/skill/skill-manager.sh" "$@" ;;
     shell|enter)     make -C "$REPO_ROOT" shell ;;
     help|-h|--help)  cmd_help ;;
     *)
