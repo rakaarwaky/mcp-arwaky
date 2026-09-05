@@ -31,10 +31,12 @@ mkdir -p "$TARGET_BIN"
   bash "$INTERNAL_DIR/scripts/install.local.sh"
 )
 
-# Create lac symlink as official short alias
+# Create lint-arwaky and la symlinks as official names
 if [ -f "$TARGET_BIN/lint-arwaky-cli" ]; then
+  ln -sf "$TARGET_BIN/lint-arwaky-cli" "$TARGET_BIN/lint-arwaky"
+  ln -sf "$TARGET_BIN/lint-arwaky-cli" "$TARGET_BIN/la"
   ln -sf "$TARGET_BIN/lint-arwaky-cli" "$TARGET_BIN/lac"
-  echo ">>> Created official short alias: $TARGET_BIN/lac -> lint-arwaky-cli"
+  echo ">>> Created official aliases: $TARGET_BIN/lint-arwaky, $TARGET_BIN/la -> lint-arwaky-cli"
 fi
 
 echo ">>> Successfully installed lint-arwaky -> $TARGET_BIN"

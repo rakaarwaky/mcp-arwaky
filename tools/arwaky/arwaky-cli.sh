@@ -67,25 +67,28 @@ cmd_help() {
   echo -e "  agents-arwaky <command> [arguments...]  (alias: aa <command>)"
   echo ""
   echo -e "${BOLD}COMMANDS:${RESET}"
-  echo -e "  ${GREEN}status${RESET}             Check health, submodule and binary installation status"
-  echo -e "  ${GREEN}doctor${RESET}             Diagnose runtime environment, container sandbox & PATH"
-  echo -e "  ${GREEN}list${RESET}               List all registered tools (vendor & internal)"
-  echo -e "  ${GREEN}run${RESET} <tool> [args]  Execute any registered tool (auto-dispatches host/container)"
-  echo -e "  ${GREEN}anytype${RESET} [action]    Manage Anytype headless daemon, bot accounts & keys"
-  echo -e "  ${GREEN}mcp${RESET} [action]       Manage MCP configurations (list, generate, show)"
-  echo -e "  ${GREEN}install${RESET} [tool]     Install full ecosystem or a specific tool from source"
-  echo -e "  ${GREEN}shell${RESET}              Enter the Distrobox 'agents-env' sandbox shell"
-  echo -e "  ${GREEN}help${RESET}               Show this help message"
+  echo -e "  ${GREEN}status${RESET}                         Check health, submodule and binary installation status"
+  echo -e "  ${GREEN}doctor${RESET}                         Diagnose runtime environment, container sandbox & PATH"
+  echo -e "  ${GREEN}list${RESET}                           List all registered tools (vendor & internal)"
+  echo -e "  ${GREEN}run${RESET} <tool> [args]              Execute any registered tool (auto-dispatches host/container)"
+  echo -e "  ${GREEN}install${RESET} [tool] [--distrobox|--host]  Install tools (Two paradigms only: Distrobox or Host)"
+  echo -e "  ${GREEN}anytype${RESET} [action]                Manage Anytype headless daemon, bot accounts & keys"
+  echo -e "  ${GREEN}mcp${RESET} [action]                   Manage MCP configurations (list, generate, show)"
+  echo -e "  ${GREEN}shell${RESET}                          Enter the Distrobox 'agents-env' sandbox shell"
+  echo -e "  ${GREEN}help${RESET}                           Show this help message"
+  echo ""
+  echo -e "${BOLD}INSTALLATION (TWO PARADIGMS ONLY):${RESET}"
+  echo -e "  ${CYAN}1. Distrobox Mode (Default / Recommended - Zero Host Contamination):${RESET}"
+  echo -e "     aa install [tool]                     (or: aa install [tool] --distrobox)"
+  echo -e "  ${YELLOW}2. Host Mode (Bare-Metal Fallback):${RESET}"
+  echo -e "     aa install [tool] --host"
   echo ""
   echo -e "${BOLD}EXAMPLES:${RESET}"
   echo -e "  aa status"
+  echo -e "  aa install fetch                       # Install fetch via Distrobox sandbox"
+  echo -e "  aa install fetch --host                # Install fetch directly on host"
+  echo -e "  aa run fetch --help"
   echo -e "  aa doctor"
-  echo -e "  aa install"
-  echo -e "  aa install 9router"
-  echo -e "  aa run context7 --help"
-  echo -e "  aa run codegraph index ."
-  echo -e "  aa run lint --help"
-  echo -e "  aa mcp generate"
   echo ""
 }
 
@@ -304,32 +307,72 @@ cmd_run() {
 }
 
 cmd_install() {
-  local tool="${1:-}"
-  if [ -z "$tool" ]; then
-    echo ">>> Running full installation pipeline..."
-    if is_inside_container; then
-      "$REPO_ROOT/tools/build/build-all.sh"
-    else
-      make -C "$REPO_ROOT" install
-    fi
-  else
+  local target=""
+  local mode="distrobox"
+
+  # Parse arguments: [tool] and [--distrobox | --host]
+  while [ $# -gt 0 ]; do
+    case "$1" in
+      --host)
+        mode="host"
+        shift
+        ;;
+      --distrobox)
+        mode="distrobox"
+        shift
+        ;;
+      -*)
+        echo -e "${RED}Error: Unknown install option '$1'${RESET}"
+        echo "Valid options: --distrobox, --host"
+        exit 1
+        ;;
+      *)
+        if [ -z "$target" ]; then
+          target="$1"
+        else
+          echo -e "${RED}Error: Unexpected argument '$1'${RESET}"
+          exit 1
+        fi
+        shift
+        ;;
+    esac
+  done
+
+  # Resolve tool_id if target is provided
+  local tool_id=""
+  if [ -n "$target" ] && [ "$target" != "all" ]; then
     local tool_info
-    tool_info="$(jq -c --arg q "$tool" '.tools[] | select(.id == $q or .binary == $q or (.alias? != null and .alias == $q))' "$MANIFEST_FILE" 2>/dev/null | head -n1 || true)"
-    
-    local tool_id="$tool"
+    tool_info="$(jq -c --arg q "$target" '.tools[] | select(.id == $q or .binary == $q or (.alias? != null and .alias == $q))' "$MANIFEST_FILE" 2>/dev/null | head -n1 || true)"
     if [ -n "$tool_info" ]; then
       tool_id="$(echo "$tool_info" | jq -r '.id')"
-    fi
-
-    echo ">>> Installing tool: $tool_id..."
-    if grep -q "^host-build-${tool_id}:" "$REPO_ROOT/Makefile"; then
-      make -C "$REPO_ROOT" "host-build-${tool_id}"
-    elif [ -x "$REPO_ROOT/tools/$tool_id/install.sh" ]; then
-      "$REPO_ROOT/tools/$tool_id/install.sh"
-    elif [ -x "$REPO_ROOT/tools/${tool_id}-mcp/install.sh" ]; then
-      "$REPO_ROOT/tools/${tool_id}-mcp/install.sh"
     else
-      make -C "$REPO_ROOT" "host-build-$tool" || make -C "$REPO_ROOT" install
+      echo -e "${RED}Error: Tool '$target' not found in manifest.${RESET}"
+      echo "Run 'aa list' to view registered tools."
+      exit 1
+    fi
+  fi
+
+  if [ "$mode" = "host" ]; then
+    echo -e "${BOLD}>>> [Mode: Host Bare-Metal] Installing ${tool_id:-all tools}...${RESET}"
+    if [ -n "$tool_id" ]; then
+      make -C "$REPO_ROOT" "host-build-${tool_id}"
+    else
+      make -C "$REPO_ROOT" host-build
+    fi
+  else
+    echo -e "${BOLD}>>> [Mode: Distrobox Sandbox] Installing ${tool_id:-all tools}...${RESET}"
+    if is_inside_container; then
+      if [ -n "$tool_id" ]; then
+        "$REPO_ROOT/tools/build/build-tool.sh" "$tool_id"
+      else
+        "$REPO_ROOT/tools/build/build-all.sh"
+      fi
+    else
+      if [ -n "$tool_id" ]; then
+        make -C "$REPO_ROOT" "install-${tool_id}"
+      else
+        make -C "$REPO_ROOT" install
+      fi
     fi
   fi
 }
