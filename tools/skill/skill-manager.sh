@@ -192,6 +192,20 @@ lean-ctx:vendor:Token-lean repository indexing & context compression:vendor/lean
 ponytail:vendor:Senior-dev instructions, patterns & audit skills:vendor/ponytail/skills/ponytail/SKILL.md
 codegraph:vendor:High-performance code graph engine & symbol intelligence:tools/codegraph/SKILL.md
 9router:vendor:Local AI routing gateway & token saver (40+ providers):vendor/9router/skills/9router/SKILL.md
+skill-manager:internal:Skill discovery, audit & provisioning orchestrator:tools/skill/SKILL.md
+EOF
+}
+
+# --- Canonical Skill Packs ---
+get_skill_packs() {
+  cat << 'EOF'
+aes-python:lint-arwaky:12:AES 7-Layer Architecture & Compliance for Python:internal/lint-arwaky/.agents/skills/*-python
+aes-rust:lint-arwaky:12:AES 7-Layer Architecture & Compliance for Rust:internal/lint-arwaky/.agents/skills/*-rust
+aes-typescript:lint-arwaky:12:AES 7-Layer Architecture & Compliance for TypeScript:internal/lint-arwaky/.agents/skills/*-typescript
+agent-roles:ecosystem:5:Multi-Agent Roles (Architect, BA, Tech Lead, Dev, QA):internal/vision-arwaky/.agents/skills/role-*
+9router:9router:9:Local AI Gateway Routing, Search & Multimodal Services:vendor/9router/skills/*
+ponytail:ponytail:6:Senior Dev Instructions, Debt Analysis & Code Review:vendor/ponytail/skills/*
+core-tools:ecosystem:13:Canonical Tool-Usage Skills for all 13 Registered Tools:canonical
 EOF
 }
 
@@ -204,7 +218,9 @@ cmd_help() {
   echo ""
   echo -e "${BOLD}COMMANDS:${RESET}"
   echo -e "  ${GREEN}list, ls${RESET}                  List all available internal and vendor skills"
-  echo -e "  ${GREEN}install, copy, get${RESET} <name> Copy skill to current workspace (agents/skill/ & .agents/skills/)"
+  echo -e "  ${GREEN}pack list, pack ls${RESET}        List available multi-skill packs (AES Python, Rust, TS, Roles, etc.)"
+  echo -e "  ${GREEN}pack install${RESET} <pack-name>  Install an entire skill pack to workspace"
+  echo -e "  ${GREEN}install, copy, get${RESET} <name> Copy skill or pack to workspace (agents/skill/ & .agents/skills/)"
   echo -e "  ${GREEN}install all, sync${RESET}         Provision all canonical skills to current workspace"
   echo -e "  ${GREEN}show${RESET} <name>               Display the content of a skill's SKILL.md in terminal"
   echo -e "  ${GREEN}check${RESET}                     Audit SKILL.md coverage across all registered tools"
@@ -217,11 +233,12 @@ cmd_help() {
   echo ""
   echo -e "${BOLD}EXAMPLES:${RESET}"
   echo -e "  aa skill list"
-  echo -e "  aa skill check"
+  echo -e "  aa skill pack list"
+  echo -e "  aa skill pack install aes-python"
   echo -e "  aa skill install blender"
   echo -e "  aa skill install fetch --target /path/to/workspace"
   echo -e "  aa skill install all"
-  echo -e "  aa skill show codegraph"
+  echo -e "  aa skill show lint-arwaky"
   echo ""
 }
 

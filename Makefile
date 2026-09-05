@@ -94,7 +94,7 @@ clean:
 clean-host:
 	@echo ">>> Cleaning host ~/.local/bin and ~/.local/share tool installations..."
 	rm -f $(HOME)/.local/bin/{context7-mcp,fetch-mcp,lean-ctx,ponytail-mcp,anytype-mcp,codegraph-mcp,9router,agents-arwaky,aa,arwaky,lint-arwaky,la,lint-arwaky-cli,lac,vision-arwaky,va,vision-arwaky-mcp,qwen-web-arwaky,qwa,qwc,qwen-web-mcp,blender-arwaky,ba,blender-mcp}
-	rm -rf $(HOME)/.local/share/{context7,fetch-mcp,lean-ctx,ponytail,anytype-mcp,codegraph,9router,agents-arwaky}
+	rm -rf $(HOME)/.local/share/{context7,fetch-mcp,lean-ctx,ponytail,anytype-mcp,codegraph,9router,agents-arwaky,vision-arwaky,qwen-web,blender-arwaky}
 	@echo ">>> Host tool binaries and data directories cleaned."
 
 distclean: clean clean-host
